@@ -26,13 +26,15 @@ const solution = (content) => {
   const countOfSU = 10;
   const countOfSSU = 20;
   const maxStrength = Math.max(...detailsData.map((el) => el[1]));
-  const sUnit = detailsData.filter((el) => el.includes(String(maxStrength))).flat();
-  const sSUnit = detailsData.filter((el) => !el.includes(String(maxStrength))).flat();
+  const sUnit = detailsData.filter((el) => el[1] === String(maxStrength)).flat();
+  const sSUnits = detailsData.filter((el) => el[1] !== String(maxStrength));
+  const maxStrengthSSU = Math.max(...sSUnits.map((el) => el[1]));
+  const sSUnit = sSUnits.filter((el) => el[1] === String(maxStrengthSSU)).flat();
   const price = priceForOne(sUnit) * countOfSU + priceForOne(sSUnit) * countOfSSU;
   console.log(`Цена найма 10 самых сильных существ и 20 существ вторых по силе: ${Math.round(price)}`);
   // 3 
-  const fattest = detailsData.filter((el) => el.includes(String(Math.max(...detailsData.map((el) => el[3]))))).flat();
-  const thinnest = detailsData.filter((el) => el.includes(String(Math.min(...detailsData.map((el) => el[3]))))).flat();
+  const fattest = detailsData.filter((el) => el[5] === String(Math.max(...detailsData.map((el) => el[5])))).flat();
+  const thinnest = detailsData.filter((el) => el[5] === String(Math.min(...detailsData.map((el) => el[5])))).flat();
   const priceFattestAndThinnest = Number(fattest[fattest.length-1]) + Number(thinnest[thinnest.length-1]);
   console.log(`Самый толстый юнит: ${fattest[0]}, Самый худой юнит: ${thinnest[0]}, Стоимость найма этих отрядов: ${priceFattestAndThinnest}`)
   // 4
@@ -51,7 +53,7 @@ const solution = (content) => {
   }, []);
     const strongestSquad = Math.max(...squads.map((el) => el[0]));
     const strongestType = squads.filter((el) => el.includes(strongestSquad)).flat();
-  console.log(`Отряд за 10000: ${strongestType[0]} ${strongestType[1]}`);
+  console.log(`Отряд за 10000: ${strongestType[0]} ${strongestType[1]}ов`);
   
 };
 
