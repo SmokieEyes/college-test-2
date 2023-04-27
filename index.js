@@ -22,7 +22,7 @@ const solution = (content) => {
   // 1
   console.log(`Сколько всего видов существ: ${data.length}`);
   // 2
-  const priceForOne = (list) => Number(list[list.length-1]) / Number(list[3]);
+  const priceForOne = (list) => Number(list[list.length-1]);
   const countOfSU = 10;
   const countOfSSU = 20;
   const maxStrength = Math.max(...detailsData.map((el) => el[1]));
@@ -34,9 +34,10 @@ const solution = (content) => {
   console.log(`Цена найма 10 самых сильных существ и 20 существ вторых по силе: ${Math.round(price)}`);
   // 3 
   const fattest = detailsData.filter((el) => el[5] === String(Math.max(...detailsData.map((el) => el[5])))).flat();
+  const fattestSquadPrice = Number(fattest[3]) * priceForOne(fattest);
   const thinnest = detailsData.filter((el) => el[5] === String(Math.min(...detailsData.map((el) => el[5])))).flat();
-  const priceFattestAndThinnest = Number(fattest[fattest.length-1]) + Number(thinnest[thinnest.length-1]);
-  console.log(`Самый толстый юнит: ${fattest[0]}, Самый худой юнит: ${thinnest[0]}, Стоимость найма этих отрядов: ${priceFattestAndThinnest}`)
+  const thinnestSquadPrice = Number(thinnest[3]) * priceForOne(thinnest);
+  console.log(`Самый толстый юнит: ${fattest[0]}, стоимость найма отряда: ${fattestSquadPrice}, Самый худой юнит: ${thinnest[0]}, стоимость найма отряда: ${thinnestSquadPrice}`)
   // 4
   const coefUnits = detailsData.reduce((acc, el) => [...acc, [el[1] / el[el.length-1], el[0]]], []);
   const profitableCoef = Math.max(...coefUnits.map((el) => el[0]));
@@ -48,13 +49,12 @@ const solution = (content) => {
   const currency = 10000;
   const squads = detailsData.reduce((acc, el) => {
     const countSquads = (currency / el[el.length-1]);
-    const strOfSquad = countSquads * Number(el[3]) * Number(el[1]);
+    const strOfSquad = countSquads * Number(el[1]);
     return [...acc, [strOfSquad, el[0]]];
   }, []);
     const strongestSquad = Math.max(...squads.map((el) => el[0]));
     const strongestType = squads.filter((el) => el.includes(strongestSquad)).flat();
   console.log(`Отряд за 10000: ${strongestType[0]} ${strongestType[1]}ов`);
-  
 };
 
 solution(content);
