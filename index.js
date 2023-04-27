@@ -30,7 +30,7 @@ const solution = (content) => {
   const sUnit = detailsData.filter((el) => el.includes(String(maxStrength))).flat();
   const sSUnit = detailsData.filter((el) => !el.includes(String(maxStrength))).flat();
   const price = priceForOne(sUnit) * countOfSU + priceForOne(sSUnit) * countOfSSU;
-  console.log(`Цена найма 10 самых сильных существ и 20 существ вторых по силе: ${price}`);
+  console.log(`Цена найма 10 самых сильных существ и 20 существ вторых по силе: ${Math.round(price)}`);
   // 3 
   const fattest = detailsData.filter((el) => el.includes(String(Math.max(...detailsData.map((el) => el[3]))))).flat();
   const thinnest = detailsData.filter((el) => el.includes(String(Math.min(...detailsData.map((el) => el[3]))))).flat();
