@@ -17,11 +17,10 @@ const content = fs.readFileSync(path.join(
 // BEGIN
 const solution = (content) => {
 
-  const data = content.split('\r\n').slice(1, content.split('\r\n').length);
+  const data = content.split('\r\n').slice(1);
   const detailsData = data.map((el) => el.split('|').filter((el) => el).map((el) => el.trim()));
   // 1
-  const count = data.length;
-  console.log(`Сколько всего видов существ: ${count}`);
+  console.log(`Сколько всего видов существ: ${data.length}`);
   // 2
   const priceForOne = (list) => Number(list[list.length-1]) / Number(list[3]);
   const countOfSU = 10;
