@@ -37,7 +37,7 @@ const solution = (content) => {
   const fattestSquadPrice = Number(fattest[3]) * priceForOne(fattest);
   const thinnest = detailsData.filter((el) => el[5] === String(Math.min(...detailsData.map((el) => el[5])))).flat();
   const thinnestSquadPrice = Number(thinnest[3]) * priceForOne(thinnest);
-  console.log(`Самый толстый юнит: ${fattest[0]}, стоимость найма отряда: ${fattestSquadPrice}, Самый худой юнит: ${thinnest[0]}, стоимость найма отряда: ${thinnestSquadPrice}`)
+  console.log(`Самый толстый юнит: ${fattest[0]}. Cтоимость найма отряда ${fattest[0]}ов: ${fattestSquadPrice}, Самый худой юнит: ${thinnest[0]}. Стоимость найма отряда ${thinnest[0]}ов: ${thinnestSquadPrice}`)
   // 4
   const coefUnits = detailsData.reduce((acc, el) => [...acc, [el[1] / el[el.length-1], el[0]]], []);
   const profitableCoef = Math.max(...coefUnits.map((el) => el[0]));
