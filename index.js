@@ -34,22 +34,14 @@ const solution = (content) => {
   const thinnest = detailsData.filter((el) => el[5] === String(Math.min(...detailsData.map((el) => el[5])))).flat();
   console.log(`Самый толстый юнит: ${fattest[0]}. Cтоимость найма отряда ${fattest[0]}ов: ${Number(fattest[3]) * priceForOne(fattest)}, Самый худой юнит: ${thinnest[0]}. Стоимость найма отряда ${thinnest[0]}ов: ${Number(thinnest[3]) * priceForOne(thinnest)}`)
   // 4
-  const coefUnits = detailsData.reduce((acc, el) => [...acc, [el[1] / el[el.length-1], el[0]]], []);
-  const profitableCoef = Math.max(...coefUnits.map((el) => el[0]));
-  const unprofitableCoef = Math.min(...coefUnits.map((el) => el[0]));
+  const coefUnits = detailsData.reduce((acc, el) => [...acc, [Math.round(el[el.length-1] / el[1]), el[0], el[el.length-1]] ], []);
+  const unprofitableCoef = Math.max(...coefUnits.map((el) => el[0]));
+  const profitableCoef = Math.min(...coefUnits.map((el) => el[0]));
   const profitableUnit = coefUnits.filter((el) => el.includes(profitableCoef)).flat();
   const unprofitableUnit = coefUnits.filter((el) => el.includes(unprofitableCoef)).flat();
   console.log(`Самые невыгодные: ${unprofitableUnit[1]}, Самые выгодные: ${profitableUnit[1]}`);
   //5
-  const currency = 10000;
-  const squads = detailsData.reduce((acc, el) => {
-    const countSquads = (currency / el[el.length-1]);
-    const strOfSquad = countSquads * Number(el[1]);
-    return [...acc, [strOfSquad, el[0]]];
-  }, []);
-    const strongestSquad = Math.max(...squads.map((el) => el[0]));
-    const strongestType = squads.filter((el) => el.includes(strongestSquad)).flat();
-  console.log(`Отряд за 10000: ${strongestType[0]} ${strongestType[1]}ов`);
+  console.log(`Отряд за 10000: ${10000 / priceForOne(profitableUnit)} ${profitableUnit[1]}ов`);
 };
 
 solution(content);
