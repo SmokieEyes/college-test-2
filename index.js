@@ -43,6 +43,6 @@ const solution = (content) => {
   //5
   console.log(`Отряд за 10000: ${10000 / priceForOne(profitableUnit)} ${profitableUnit[1]}ов`);
 };
-
+//test
 solution(content);
 // END
